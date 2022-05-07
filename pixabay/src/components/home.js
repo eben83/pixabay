@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
-import Image from "../image/image";
+import Image from "./image";
+import styled from "styled-components";
 
-import './home.xs.css'
 import {Container} from "react-bootstrap";
 
 const Home = () => {
@@ -19,15 +19,20 @@ const Home = () => {
   return (
     <>
       <Container fluid className='home'>
-        <div className='imageContainer'>
+        <Wrapper>
           {data && data.map((item) => {
             return (
               <Image src={item.previewURL} alt={'test'} />
             )
           })}
-        </div>
+        </Wrapper>
       </Container>
     </>
   );
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`
 export default Home;
