@@ -10,49 +10,49 @@ const LargeImage = (props) => {
   return (
     <>
       <Wrapper>
-        <img src={image.largeImageURL} alt={'test'} />
+        <img src={image.fullHDURL} alt={image.tags} />
         <Context>
-          <div className='row justify-content-evenly'>
-            <div className='col-4 col-md-3  d-flex flex-column align-content-around text-center'>
-              <label>
-                <FontAwesomeIcon icon={faUser} className='pr-1' />
-                <p className='ml-1'>User</p>
-              </label>
-              <div>{image.user}</div>
-            </div>
-            <div className='col-4 col-md-3  d-flex flex-column align-content-around text-center'>
-              <label>
-                <FontAwesomeIcon icon={faTag} className='pr-1' />
-                <p className='ml-1'>Tags</p>
-              </label>
-              <div>{image.tags}</div>
-            </div>
-            <div className='col-4 col-md-3  d-flex flex-column align-content-around text-center'>
-              <label>
-                <FontAwesomeIcon icon={faUsersViewfinder} className='pr-1' />
-                <p className='ml-1'>Views</p>
-              </label>
-              <div>{image.views}</div>
-            </div>
-            <div className='col-4 col-md-3  d-flex flex-column align-content-around text-center'>
-              <label>
-                <FontAwesomeIcon icon={faDownload} className='pr-1' />
-                <p className='ml-1'>Downloads</p>
-              </label>
-              <div>{image.downloads}</div>
-            </div>
-            <div className='col-4 col-md-3 d-flex flex-column align-content-around text-center'>
-              <label>
-                <FontAwesomeIcon icon={faDownload} className='pr-1' />
-                <p className='ml-1'>Size</p>
-              </label>
-              <div>{image.imageSize}</div>
-            </div>
+          <div>
+            <label>
+              <FontAwesomeIcon icon={faUser} className='pr-1' />
+              <p className='ml-1 mb-0 fw-bold'>User</p>
+            </label>
+            <div>{image.user}</div>
+          </div>
+          <div>
+            <label>
+              <FontAwesomeIcon icon={faTag} className='pr-1' />
+              <p className='ml-1 mb-0 fw-bold'>Tags</p>
+            </label>
+            <div>{image.tags}</div>
+          </div>
+          <div>
+            <label>
+              <FontAwesomeIcon icon={faUsersViewfinder} className='pr-1' />
+              <p className='ml-1 mb-0 fw-bold'>Views</p>
+            </label>
+            <div>{image.views}</div>
+          </div>
+          <div>
+            <label>
+              <FontAwesomeIcon icon={faDownload} className='pr-1' />
+              <p className='ml-1 mb-0 fw-bold'>Downloads</p>
+            </label>
+            <div>{image.downloads}</div>
+          </div>
+          <div>
+            <label>
+              <FontAwesomeIcon icon={faDownload} className='pr-1' />
+              <p className='ml-1 mb-0 fw-bold'>Size</p>
+            </label>
+            <div>{image.imageSize}</div>
           </div>
         </Context>
         
         <UserImage>
-          <img src={image.userImageURL}  alt={'image'}/>
+          {image.userImageURL && 
+            <img src={image.userImageURL}  alt={'image'}/>
+          }
         </UserImage>
       </Wrapper>
 
@@ -72,16 +72,39 @@ const LargeImage = (props) => {
 const Wrapper = styled.div`
   position: relative;
   overflow: hidden;
+  margin: 0.2rem 0.1rem 0.5rem 0.1rem;
   img {
     object-fit: cover;
     width: 100vw;
     height: 99vh;
+    box-shadow:
+            0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+            0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+            0 12.5px 10px rgba(0, 0, 0, 0.06),
+            0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+            0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+            0 100px 80px rgba(0, 0, 0, 0.12);
   }
 `
 
 const Context = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-evenly;
+  padding: 1rem;
+  width: 100vw;
+  
+  div {
+    width: 8rem;
+    height: auto;
+    text-align: center;
+    margin: 0.4rem;
+    color: #0074FF;
+    
+    p {
+      color: #000000;
+    }
+  }
 `
 
 const UserImage = styled.div`
@@ -95,13 +118,21 @@ const UserImage = styled.div`
     position: absolute;
     top: 1rem;
     right: 2rem;
+    box-shadow:
+            0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+            0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+            0 12.5px 10px rgba(0, 0, 0, 0.06),
+            0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+            0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+            0 100px 80px rgba(0, 0, 0, 0.12);
   }
+  
 `
 
 const BackButton = styled.div`
     position: fixed;
     left: 20px;
-    background-color: lightblue;
+    background-image: linear-gradient(to right, #00C3FF, #0074FF);
     top: 20px;
     border-radius: 50px;
     z-index: 1000;
@@ -109,6 +140,7 @@ const BackButton = styled.div`
     padding: 0.5rem;
     animation: fadeIn 0.3s;
     transition: opacity 0.4s;
+    border: 1px solid blue;
     .bg-icon {
       font-size: 2rem;
       color: white;
